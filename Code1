@@ -1,0 +1,67 @@
+class StudentManagementSystem:
+    def __init__(self):
+        self.students = {}
+
+    def add_student(self, student_id, name, age, grade):
+        if student_id not in self.students:
+            self.students[student_id] = {'name': name, 'age': age, 'grade': grade}
+            print(f"Student with ID {student_id} added successfully.")
+        else:
+            print(f"Student with ID {student_id} already exists.")
+
+    def view_student(self, student_id):
+        if student_id in self.students:
+            student_info = self.students[student_id]
+            print(f"Student ID: {student_id}")
+            print(f"Name: {student_info['name']}")
+            print(f"Age: {student_info['age']}")
+            print(f"Grade: {student_info['grade']}")
+        else:
+            print(f"Student with ID {student_id} does not exist.")
+
+    def update_student(self, student_id, name=None, age=None, grade=None):
+        if student_id in self.students:
+            student_info = self.students[student_id]
+            if name:
+                student_info['name'] = name
+            if age:
+                student_info['age'] = age
+            if grade:
+                student_info['grade'] = grade
+            print(f"Student with ID {student_id} updated successfully.")
+        else:
+            print(f"Student with ID {student_id} does not exist.")
+
+    def delete_student(self, student_id):
+        if student_id in self.students:
+            del self.students[student_id]
+            print(f"Student with ID {student_id} deleted successfully.")
+        else:
+            print(f"Student with ID {student_id} does not exist.")
+
+    def list_students(self):
+        if self.students:
+            print("List of Students:")
+            for student_id, student_info in self.students.items():
+                print(f"ID: {student_id}, Name: {student_info['name']}, Age: {student_info['age']}, Grade: {student_info['grade']}")
+        else:
+            print("No students found.")
+
+
+# Example usage:
+if __name__ == "__main__":
+    sms = StudentManagementSystem()
+
+    sms.add_student(101, 'John Doe', 18, 'A')
+    sms.add_student(102, 'Jane Smith', 17, 'B')
+
+    sms.view_student(101)
+    sms.view_student(103)  # Student does not exist
+
+    sms.list_students()
+
+    sms.update_student(101, name='John Doe Jr.', age=19)
+    sms.view_student(101)
+
+    sms.delete_student(102)
+    sms.list_students()
